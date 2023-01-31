@@ -1,0 +1,29 @@
+version: '3.0'
+
+services:
+  db:
+      image: mysql:8.0
+      container_name: 'db'
+      volumes:
+        - ./mysql/db:/docker-entrypoint-initdb.d # 初期データ
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      environment:
+        MYSQL_DATABASE: nutmeg_db
+        MYSQL_USER: nutmeg
+        MYSQL_PASSWORD: password
+        MYSQL_ROOT_PASSWORD: root
+        TZ: 'Asia/Tokyo'
+      ports:
+        - '3306:3306'
+      restart: always
+
+  api:
+    container_name: 'api'
+    build:
+      context: ./api
+    volumes:
+      - ./api:/app
+    ports:
+      - '1323:1323'
+    tty: true
+    stdin_open: true
