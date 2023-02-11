@@ -27,3 +27,14 @@ services:
       - '1323:1323'
     tty: true
     stdin_open: true
+  view:
+    build: ./view
+    container_name: 'view'
+    ports:
+      - "3000:3000"
+      - "6006:6006"
+    command: sh -c "npm install && npm run dev"
+    volumes:
+      - ./view:/app
+    stdin_open: true
+    tty: true
