@@ -27,9 +27,11 @@ func sqlConnect() *gorm.DB {
 }
 
 func main() {
-
-	e := echo.New()
+	// TODO: DB接続
 	DB = sqlConnect()
+
+	// TODO: Echoインスタンスを作成する
+	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
