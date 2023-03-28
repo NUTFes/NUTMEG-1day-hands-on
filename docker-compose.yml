@@ -27,6 +27,14 @@ services:
       - '1323:1323'
     tty: true
     stdin_open: true
+    environment:
+        MYSQL_DATABASE: nutmeg_db
+        MYSQL_USER: nutmeg
+        MYSQL_PASSWORD: password
+        MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - db
+
   view:
     build: ./view
     container_name: 'view'
