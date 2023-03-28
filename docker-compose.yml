@@ -32,6 +32,8 @@ services:
         MYSQL_USER: nutmeg
         MYSQL_PASSWORD: password
         MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - db
 
   view:
     build: ./view
