@@ -9,8 +9,6 @@ export const TaskDeleteModal: React.FC<TaskDeleteModalProps> = (props) => {
   const submit = () => {
     const url = process.env.CSR_API_URI + "/tasks/" + props.task.id;
 
-    console.log(url)
-
     fetch(url, {
       method: "DELETE",
       mode: "cors",
