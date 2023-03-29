@@ -4,14 +4,12 @@ import { Card, TaskCard, TaskAddModal, Button } from "@components/common";
 import { BiAddToQueue } from "react-icons/bi";
 
 export const TaskListCard: React.FC<TaskListCardProps> = (props) => {
-  const { tasks, status } = props;
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
       {isModalOpen && (
-        <TaskAddModal status={status} onClose={() => setIsModalOpen(false)} />
+        <TaskAddModal status={props.status} onClose={() => setIsModalOpen(false)} />
       )}
       <Card>
         <div className="flex items-center justify-between">
@@ -21,7 +19,7 @@ export const TaskListCard: React.FC<TaskListCardProps> = (props) => {
           </Button>
         </div>
         <div className="flex flex-col gap-5 mt-5">
-          {tasks.map((task) => (
+          {props.tasks.map((task) => (
             <TaskCard key={task.id} task={task} />
           ))}
         </div>

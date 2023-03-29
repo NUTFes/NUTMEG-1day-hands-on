@@ -9,15 +9,13 @@ import {
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
 export const TaskCard: React.FC<TaskCardProps> = (props) => {
-  const { task } = props;
-
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   return (
     <>
       {isEditModalOpen && (
-        <TaskEditModal task={task} onClose={() => setIsEditModalOpen(false)} />
+        <TaskEditModal task={props.task} onClose={() => setIsEditModalOpen(false)} />
       )}
       {isDeleteModalOpen && (
         <TaskDeleteModal
