@@ -1,6 +1,4 @@
-export type ButtonProps = {
-  theme?: "primary" | "danger" | "success";
-  size?: "large" | "medium" | "small";
-  outlined?: boolean;
-  fullWidth?: boolean;
-} & JSX.IntrinsicElements["button"];
+export interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+}
