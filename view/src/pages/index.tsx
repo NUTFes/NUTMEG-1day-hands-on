@@ -1,21 +1,35 @@
-import Head from "next/head";
+import { NextPage } from "next";
+import { Card, TaskCard, TaskListCard } from "@components/common";
+import { Task } from "@type/task.types";
+import { useMemo } from "react";
 
-import { Button } from "@/components/common";
-
-export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>NUTMEG ToDo</title>
-        <meta name="description" content="ToDoアプリ" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main className="min-h-screen bg-orange-400">
-        <div className="w-full bg-slate-800 text-white h-16 flex justify-center items-center shadow-lg">
-          <h1 className="text-2xl font-bold">NUTMEG ToDo</h1>
-        </div>
-        <Button>TEST</Button>
-      </main>
-    </>
-  );
+interface Props {
+  tasks: Task[];
 }
+
+export const getServerSideProps = async () => {
+  const tasksUrl = process.env.SSR_API_URI + "/tasks";
+  const tasks = await fetch(tasksUrl).then((res) => res.json());
+
+  return {
+    props: {
+      tasks,
+    },
+  };
+};
+
+export const Home: NextPage<Props> = ({ tasks }) => {
+  const todoTasks = useMemo(() => tasks.filter((task) => task.status === "todo"), [tasks]);
+  const doingTasks = useMemo(() => tasks.filter((task) => task.status === "doing"), [tasks]);
+  const doneTasks = useMemo(() => tasks.filter((task) => task.status === "done"), [tasks]);
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 m-5">
+      <TaskListCard tasks={todoTasks} status="todo" />
+      <TaskListCard tasks={doingTasks} status="doing" />
+      <TaskListCard tasks={doneTasks} status="done" />
+    </div>
+  );
+};
+
+export default Home;
