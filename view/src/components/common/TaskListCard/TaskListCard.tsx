@@ -13,7 +13,7 @@ export const TaskListCard: React.FC<TaskListCardProps> = (props) => {
       )}
       <Card>
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">{status}</h1>
+          <h1 className="text-2xl font-bold">{props.status}</h1>
           <Button onClick={() => setIsModalOpen(true)}>
             <BiAddToQueue className="w-full h-full" />
           </Button>

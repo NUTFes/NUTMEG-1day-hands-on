@@ -19,17 +19,17 @@ export const TaskCard: React.FC<TaskCardProps> = (props) => {
       )}
       {isDeleteModalOpen && (
         <TaskDeleteModal
-          task={task}
+          task={props.task}
           onClose={() => setIsDeleteModalOpen(false)}
         />
       )}
       <Card>
         <div className="mb-3 flex justify-between">
           <div>
-            <h1 className="text-xl font-bold">{task.task_name}</h1>
+            <h1 className="text-xl font-bold">{props.task.task_name}</h1>
             <p>
               <span className="font-bold">User : </span>
-              {task.user_name}
+              {props.task.user_name}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -43,7 +43,7 @@ export const TaskCard: React.FC<TaskCardProps> = (props) => {
         </div>
         <hr className="border-background border" />
         <div className="my-3">
-          <p>{task.content}</p>
+          <p>{props.task.content}</p>
         </div>
       </Card>
     </>
