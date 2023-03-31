@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -15,12 +16,12 @@ var DB *gorm.DB
 
 type Task struct {
 	Id        int       `json:"id" gorm:"primary_key"`
-	TaskName  string    `json:"task_name" gorm:"not null"`
+	TaskName  string    `json:"taskName" gorm:"not null"`
 	Content   string    `json:"content" gorm:"not null"`
 	Status    string    `json:"status" gorm:"not null"`
-	UserName  string    `json:"user_name" gorm:"not null"`
-	CreatedAt time.Time `json:"created_at" gorm:"not null"`
-	UpdatedAt time.Time `json:"updated_at" gorm:"not null"`
+	UserName  string    `json:"userName" gorm:"not null"`
+	CreatedAt time.Time `json:"createdAt" gorm:"not null"`
+	UpdatedAt time.Time `json:"updatedAt" gorm:"not null"`
 }
 
 func getTasks(c echo.Context) error {
@@ -37,35 +38,23 @@ func getTask(c echo.Context) error {
 }
 
 func createTask(c echo.Context) error {
-	taskName := c.QueryParam("task_name")
-	content := c.QueryParam("content")
-	status := c.QueryParam("status")
-	userName := c.QueryParam("user_name")
-	task := Task{
-		TaskName:  taskName,
-		Content:   content,
-		Status:    status,
-		UserName:  userName,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+	task := new(Task)
+	if err := c.Bind(task); err != nil {
+		return err
 	}
+	task.CreatedAt = time.Now()
+	task.UpdatedAt = time.Now()
 	DB.Create(&task)
 	return c.JSON(http.StatusOK, task)
 }
 
 func updateTask(c echo.Context) error {
 	id := c.Param("id")
-	taskName := c.QueryParam("task_name")
-	content := c.QueryParam("content")
-	status := c.QueryParam("status")
-	userName := c.QueryParam("user_name")
-	task := Task{
-		TaskName:  taskName,
-		Content:   content,
-		Status:    status,
-		UserName:  userName,
-		UpdatedAt: time.Now(),
+	task := new(Task)
+	if err := c.Bind(task); err != nil {
+		return err
 	}
+	task.UpdatedAt = time.Now()
 	DB.Model(&task).Where("id = ?", id).Updates(task)
 	return c.JSON(http.StatusOK, task)
 }
@@ -83,7 +72,7 @@ func creatSeed() {
 			Id:        1,
 			TaskName:  "backend",
 			Content:   "Create user API",
-			Status:    "doing",
+			Status:    "inProgress",
 			UserName:  "nutmeg man",
 			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),
@@ -92,7 +81,7 @@ func creatSeed() {
 			Id:        2,
 			TaskName:  "backend",
 			Content:   "Create task API",
-			Status:    "doing",
+			Status:    "inProgress",
 			UserName:  "nutmeg man2",
 			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),
@@ -127,6 +116,15 @@ func main() {
 
 	// TODO: Echoインスタンスを作成する
 	e := echo.New()
+
+	// cors設定
+	arrowOrigins := []string{"*"}
+	e.Use(middleware.Logger())
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: arrowOrigins,
+		AllowMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete},
+	}))
+
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})

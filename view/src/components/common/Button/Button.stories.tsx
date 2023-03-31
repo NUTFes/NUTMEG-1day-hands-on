@@ -8,13 +8,7 @@ export default {
 
 export const Default: ComponentStoryObj<typeof Button> = {
   args: {
-    onClick: () => {
-      alert("Call me?");
-    },
     children: "TEST ME",
-    size: "medium",
-    theme: "primary",
-    outlined: false,
   },
   storyName: "Default",
 };
