@@ -5,7 +5,9 @@ const Button: React.FC<ButtonProps> = (props) => {
     <button
       type="button"
       className="bg-background text-secondary rounded-md shadow-md p-2 hover:bg-orange-600 transition-all"
-      onClick={props.onClick}
+      onClick={() => {
+        if (props.onClick) props.onClick();
+      }}
     >
       {props.children}
     </button>
