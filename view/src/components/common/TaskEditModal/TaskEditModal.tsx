@@ -82,9 +82,9 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = (props) => {
             onChange={handleFormDataChange}
             className="w-full border border-background rounded-lg p-2"
           >
-            <option value="todo">Todo</option>
-            <option value="doing">Doing</option>
-            <option value="done">Done</option>
+            <option value="ToDo">ToDo</option>
+            <option value="inProgress">inProgress</option>
+            <option value="Done">Done</option>
           </select>
         </div>
       </div>

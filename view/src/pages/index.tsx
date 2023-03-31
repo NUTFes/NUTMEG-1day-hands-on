@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Card, TaskCard, TaskListCard } from "@components/common";
+import { TaskListCard } from "@components/common";
 import { Task } from "@type/task.types";
 import { useMemo } from "react";
 
@@ -19,15 +19,15 @@ export const getServerSideProps = async () => {
 };
 
 export const Home: NextPage<Props> = ({ tasks }) => {
-  const todoTasks = useMemo(() => tasks.filter((task) => task.status === "todo"), [tasks]);
-  const doingTasks = useMemo(() => tasks.filter((task) => task.status === "doing"), [tasks]);
-  const doneTasks = useMemo(() => tasks.filter((task) => task.status === "done"), [tasks]);
+  const todoTasks = useMemo(() => tasks.filter((task) => task.status === "ToDo"), [tasks]);
+  const inProgressTasks = useMemo(() => tasks.filter((task) => task.status === "inProgress"), [tasks]);
+  const doneTasks = useMemo(() => tasks.filter((task) => task.status === "Done"), [tasks]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 m-5">
-      <TaskListCard tasks={todoTasks} status="todo" />
-      <TaskListCard tasks={doingTasks} status="doing" />
-      <TaskListCard tasks={doneTasks} status="done" />
+      <TaskListCard tasks={todoTasks} status="ToDo" />
+      <TaskListCard tasks={inProgressTasks} status="inProgress" />
+      <TaskListCard tasks={doneTasks} status="Done" />
     </div>
   );
 };

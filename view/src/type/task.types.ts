@@ -2,7 +2,7 @@ export interface Task {
   id: number;
   taskName: string;
   content: string;
-  status: 'todo' | 'doing' | 'done';
+  status: 'ToDo' | 'inProgress' | 'Done';
   userName: string;
   createdAt: string;
   updatedAt: string;
