@@ -26,10 +26,10 @@ export const TaskCard: React.FC<TaskCardProps> = (props) => {
       <Card>
         <div className="mb-3 flex justify-between">
           <div>
-            <h1 className="text-xl font-bold">{props.task.task_name}</h1>
+            <h1 className="text-xl font-bold">{props.task.taskName}</h1>
             <p>
               <span className="font-bold">User : </span>
-              {props.task.user_name}
+              {props.task.userName}
             </p>
           </div>
           <div className="flex items-center gap-2">

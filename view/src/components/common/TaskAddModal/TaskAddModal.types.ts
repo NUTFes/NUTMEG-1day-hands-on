@@ -5,4 +5,4 @@ export interface TaskAddModalProps {
     status: 'todo' | 'doing' | 'done';
 }
 
-export type SubmitTaskData = Omit<Task, 'id' | 'status' | 'created_at' | 'updated_at'>;
+export type SubmitTaskData = Omit<Task, 'id' | 'status' | 'createdAt' | 'updatedAt'>;

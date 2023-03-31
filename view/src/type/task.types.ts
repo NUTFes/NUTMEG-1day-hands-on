@@ -1,9 +1,9 @@
 export interface Task {
   id: number;
-  task_name: string;
+  taskName: string;
   content: string;
   status: 'todo' | 'doing' | 'done';
-  user_name: string;
-  created_at: string;
-  updated_at: string;
+  userName: string;
+  createdAt: string;
+  updatedAt: string;
 }

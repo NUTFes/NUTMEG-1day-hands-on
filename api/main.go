@@ -16,12 +16,12 @@ var DB *gorm.DB
 
 type Task struct {
 	Id        int       `json:"id" gorm:"primary_key"`
-	TaskName  string    `json:"task_name" gorm:"not null"`
+	TaskName  string    `json:"taskName" gorm:"not null"`
 	Content   string    `json:"content" gorm:"not null"`
 	Status    string    `json:"status" gorm:"not null"`
-	UserName  string    `json:"user_name" gorm:"not null"`
-	CreatedAt time.Time `json:"created_at" gorm:"not null"`
-	UpdatedAt time.Time `json:"updated_at" gorm:"not null"`
+	UserName  string    `json:"userName" gorm:"not null"`
+	CreatedAt time.Time `json:"createdAt" gorm:"not null"`
+	UpdatedAt time.Time `json:"updatedAt" gorm:"not null"`
 }
 
 func getTasks(c echo.Context) error {

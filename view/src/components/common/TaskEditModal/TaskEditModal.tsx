@@ -7,9 +7,9 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = (props) => {
   const router = useRouter();
 
   const [formData, setFormData] = useState<SubmitTaskData>({
-    task_name: props.task.task_name,
+    taskName: props.task.taskName,
     content: props.task.content,
-    user_name: props.task.user_name,
+    userName: props.task.userName,
     status: props.task.status,
   });
 
@@ -49,8 +49,8 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = (props) => {
           <p className="text-lg">Task Name</p>
           <input
             type="text"
-            name="task_name"
-            value={formData.task_name}
+            name="taskName"
+            value={formData.taskName}
             onChange={handleFormDataChange}
             className="w-full border border-background rounded-lg p-2"
           />
@@ -59,8 +59,8 @@ export const TaskEditModal: React.FC<TaskEditModalProps> = (props) => {
           <p className="text-lg">User Name</p>
           <input
             type="text"
-            name="user_name"
-            value={formData.user_name}
+            name="userName"
+            value={formData.userName}
             onChange={handleFormDataChange}
             className="w-full border border-background rounded-lg p-2"
           />

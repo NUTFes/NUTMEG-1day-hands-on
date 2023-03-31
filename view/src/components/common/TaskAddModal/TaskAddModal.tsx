@@ -7,9 +7,9 @@ export const TaskAddModal: React.FC<TaskAddModalProps> = (props) => {
   const router = useRouter();
 
   const [formData, setFormData] = useState<SubmitTaskData>({
-    task_name: "",
+    taskName: "",
     content: "",
-    user_name: "",
+    userName: "",
   });
 
   const handleFormDataChange = (
@@ -27,9 +27,9 @@ export const TaskAddModal: React.FC<TaskAddModalProps> = (props) => {
     const url = process.env.CSR_API_URI + "/tasks";
 
     const submitData = {
-      task_name: data.task_name,
+      taskName: data.taskName,
       content: data.content,
-      user_name: data.user_name,
+      userName: data.userName,
       status: props.status,
     }
 
@@ -54,8 +54,8 @@ export const TaskAddModal: React.FC<TaskAddModalProps> = (props) => {
           <p className="text-lg">Task Name</p>
           <input
             type="text"
-            name="task_name"
-            value={formData.task_name}
+            name="taskName"
+            value={formData.taskName}
             onChange={handleFormDataChange}
             className="w-full border border-background rounded-lg p-2"
           />
@@ -64,8 +64,8 @@ export const TaskAddModal: React.FC<TaskAddModalProps> = (props) => {
           <p className="text-lg">User Name</p>
           <input
             type="text"
-            name="user_name"
-            value={formData.user_name}
+            name="userName"
+            value={formData.userName}
             onChange={handleFormDataChange}
             className="w-full border border-background rounded-lg p-2"
           />

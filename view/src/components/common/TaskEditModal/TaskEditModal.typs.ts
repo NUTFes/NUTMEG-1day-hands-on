@@ -5,4 +5,4 @@ export interface TaskEditModalProps {
     task: Task;
 }
 
-export type SubmitTaskData = Omit<Task, 'id' | 'created_at' | 'updated_at'>;
+export type SubmitTaskData = Omit<Task, 'id' | 'createdAt' | 'updatedAt'>;
